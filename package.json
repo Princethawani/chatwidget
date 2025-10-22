@@ -13,12 +13,13 @@
     "package.json"
   ],
   "scripts": {
-    "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build --dest demo",
+    "serve": "NODE_OPTIONS=--openssl-legacy-provider vue-cli-service serve",
+    "build": "NODE_OPTIONS=--openssl-legacy-provider vue-cli-service build",
     "build-bundle": "vue-cli-service build --target lib --name vue-bot-ui ./src/vue-bot-ui.js",
     "release": "standard-version && git push --follow-tags && npm publish",
     "release:next": "standard-version --prerelease next && git push --follow-tags origin dev && npm publish --tag next",
-    "lint": "vue-cli-service lint --fix"
+    "lint": "vue-cli-service lint --fix",
+    "test:unit": "vue-cli-service test:unit"
   },
   "keywords": [
     "chatbot",
@@ -58,5 +59,9 @@
     "url": "https://github.com/JuzSer/vue-bot-ui/issues"
   },
   "homepage": "https://github.com/JuzSer/vue-bot-ui#readme",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^1.12.2",
+    "emoji-picker-vue": "^1.0.1"
+  }
 }

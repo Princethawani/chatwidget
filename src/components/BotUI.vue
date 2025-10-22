@@ -55,7 +55,7 @@ import BubbleIcon from '../assets/icons/bubble.svg'
 import CloseIcon from '../assets/icons/close.svg'
 
 export default {
-  name: 'VueBotUI',
+  name: 'GraceAI UI',
 
   components: {
     BoardHeader,
@@ -100,9 +100,9 @@ export default {
     return {
       botActive: false,
       defaultOptions: {
-        botTitle: 'Chatbot',
-        colorScheme: '#1b53d0',
-        textColor: '#fff',
+        botTitle: 'GraceAI Chatbot',
+        colorScheme: '#1a1b37',
+        textColor: '#d4ae69',
         bubbleBtnSize: 56,
         animation: true,
         boardContentBg: '#fff',
@@ -110,7 +110,7 @@ export default {
         botAvatarImg: 'http://placehold.it/200x200',
         msgBubbleBgBot: '#f0f0f0',
         msgBubbleColorBot: '#000',
-        msgBubbleBgUser: '#4356e0',
+        msgBubbleBgUser: ' #d4ae69',
         msgBubbleColorUser: '#fff',
         inputPlaceholder: 'Message',
         inputDisableBg: '#fff',

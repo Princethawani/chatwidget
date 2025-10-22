@@ -1,9 +1,5 @@
 <template lang="pug">
 #app
-  img(
-    alt="Vue Bot UI",
-    src="./assets/logo.png"
-  )
   VueBotUI(
     :options="botOptions",
     :messages="messageData",
@@ -13,7 +9,14 @@
     @init="botStart",
     @msg-send="msgSend",
   )
+    // 👇 Inject custom header slot (for back button + title)
+    template(v-slot:header)
+      .qkb-board-header-slot
+        button.qkb-board-header__back(@click="handleBack")
+          img.qkb-board-header__back-icon(src="@/assets/icons/back.svg" alt="Back")
+        span.qkb-board-header__title GraceAI Chatbot
 </template>
+
 <script>
 import BotIcon from './assets/icons/bot.png'
 import { VueBotUI } from './vue-bot-ui'
@@ -34,7 +37,7 @@ export default {
         botAvatarImg: BotIcon,
         boardContentBg: '#f4f4f4',
         msgBubbleBgBot: '#fff',
-        inputPlaceholder: 'Type hereeee...',
+        inputPlaceholder: 'Enter your message...',
         inputDisableBg: '#fff',
         inputDisablePlaceholder: 'Hit the buttons above to respond'
       }
@@ -43,65 +46,77 @@ export default {
 
   methods: {
     botStart () {
-      // Get token if you want to build a private bot
-      // Request first message here
-
-      // Fake typing for the first message
-      this.botTyping = true
-      setTimeout(() => {
-        this.botTyping = false
-        this.messageData.push({
-          agent: 'bot',
-          type: 'text',
-          text: 'Hello'
-        })
-      }, 1000)
+      console.log('Bot started')
     },
 
     msgSend (value) {
-      // Push the user's message to board
       this.messageData.push({
         agent: 'user',
         type: 'text',
         text: value.text
       })
-
       this.getResponse()
     },
 
-    // Submit the message from user to bot API, then get the response from Bot
     getResponse () {
-      // Loading
       this.botTyping = true
+      const lastMessage = this.messageData[this.messageData.length - 1]
 
-      // Post the message from user here
-      // Then get the response as below
-
-      // Create new message from fake data
-      messageService.createMessage()
+      messageService.createMessage(lastMessage.text)
         .then((response) => {
           const replyMessage = {
             agent: 'bot',
             ...response
           }
-
           this.inputDisable = response.disableInput
           this.messageData.push(replyMessage)
-
-          // finish
           this.botTyping = false
         })
+    },
+
+    handleBack () {
+      console.log('Back button clicked')
+      // Optional: add logic like closing or minimizing chat
+      // e.g., document.dispatchEvent(new Event('close-bot'))
     }
   }
 }
 </script>
+
 <style lang="scss">
 #app {
-  font-family: "Avenir", Helvetica, Arial, sans-serif;
+  font-family: "Banjulee", "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  // text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+}
+
+/* 👇 Add back icon and header layout styling */
+.qkb-board-header-slot {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.qkb-board-header__back {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+}
+
+.qkb-board-header__back-icon {
+  width: 20px;
+  height: 20px;
+  color: #d4ae69; // match your theme
+}
+
+.qkb-board-header__title {
+  font-weight: 600;
+  font-size: 16px;
+  color: #d4ae69;
 }
 </style>

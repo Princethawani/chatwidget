@@ -4,28 +4,30 @@
 )
   transition(name="qkb-fadeUp")
     .qkb-board(v-if="botActive")
-      BoardHeader(
-        :bot-title="optionsMain.botTitle",
-        @close-bot="botToggle"
-      )
-        template(v-slot:header)
-          slot(name="header")
-      BoardContent(
-        :bot-typing="botTyping",
-        :main-data="messages"
-      )
-        template(v-slot:botTyping)
-          slot(name="botTyping")
-      BoardAction(
-        :input-disable="inputDisable",
-        :input-placeholder="optionsMain.inputPlaceholder",
-        :input-disable-placeholder="optionsMain.inputDisablePlaceholder",
-        @msg-send="sendMessage"
-      )
-        template(v-slot:actions)
-          slot(name="actions")
-        template(v-slot:sendButton)
-          slot(name="sendButton")
+      HomePage(v-if="showHome" @goToChat="startChat")
+      template(v-else)
+        BoardHeader(
+          :bot-title="optionsMain.botTitle",
+          @close-bot="botToggle"
+        )
+          template(v-slot:header)
+            slot(name="header")
+        BoardContent(
+          :bot-typing="botTyping",
+          :main-data="messages"
+        )
+          template(v-slot:botTyping)
+            slot(name="botTyping")
+        BoardAction(
+          :input-disable="inputDisable",
+          :input-placeholder="optionsMain.inputPlaceholder",
+          :input-disable-placeholder="optionsMain.inputDisablePlaceholder",
+          @msg-send="sendMessage"
+        )
+          template(v-slot:actions)
+            slot(name="actions")
+          template(v-slot:sendButton)
+            slot(name="sendButton")
   .qkb-bot-bubble
     button.qkb-bubble-btn(
       @click="botToggle"
@@ -53,6 +55,7 @@ import BoardAction from './Board/Action'
 import AppStyle from './AppStyle'
 import BubbleIcon from '../assets/icons/bubble.svg'
 import CloseIcon from '../assets/icons/close.svg'
+import HomePage from './HomePage.vue'
 
 export default {
   name: 'GraceAI UI',
@@ -63,7 +66,8 @@ export default {
     BoardAction,
     BubbleIcon,
     CloseIcon,
-    AppStyle
+    AppStyle,
+    HomePage
   },
 
   props: {
@@ -99,6 +103,7 @@ export default {
   data () {
     return {
       botActive: false,
+      showHome: true,
       defaultOptions: {
         botTitle: 'GraceAI Chatbot',
         colorScheme: '#1a1b37',
@@ -163,6 +168,20 @@ export default {
   },
 
   methods: {
+    startChat (initialMessage) {
+      this.showHome = false
+      this.$emit('init')
+      if (initialMessage) {
+        this.$nextTick(() => {
+          setTimeout(() => {
+            this.sendMessage(initialMessage)
+          }, 200)
+        })
+      }
+    },
+    goHome () {
+      this.showHome = true
+    },
     botOpen () {
       if (!this.botActive) {
         this.botToggle()
@@ -184,6 +203,7 @@ export default {
       } else {
         EventBus.$off('select-button-option')
         this.$emit('destroy')
+        this.showHome = true
       }
     },
 

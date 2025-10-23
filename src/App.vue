@@ -1,6 +1,7 @@
 <template lang="pug">
 #app
   VueBotUI(
+    ref="botUI"
     :options="botOptions",
     :messages="messageData",
     :bot-typing="botTyping",
@@ -13,7 +14,7 @@
     template(v-slot:header)
       .qkb-board-header-slot
         button.qkb-board-header__back(@click="handleBack")
-          img.qkb-board-header__back-icon(src="@/assets/icons/back.svg" alt="Back")
+          BackIcon.qkb-board-header__back-icon
         span.qkb-board-header__title GraceAI Chatbot
 </template>
 
@@ -21,11 +22,15 @@
 import BotIcon from './assets/icons/bot.png'
 import { VueBotUI } from './vue-bot-ui'
 import { messageService } from './helpers/message'
+import ButtonIcon from '@/assets/icons/back.svg'
+import BackIcon from '@/assets/icons/backIcon.vue'
 
 export default {
   components: {
     BotIcon,
-    VueBotUI
+    VueBotUI,
+    BackIcon,
+    ButtonIcon
   },
 
   data () {
@@ -75,9 +80,7 @@ export default {
     },
 
     handleBack () {
-      console.log('Back button clicked')
-      // Optional: add logic like closing or minimizing chat
-      // e.g., document.dispatchEvent(new Event('close-bot'))
+      this.$refs.botUI.goHome()
     }
   }
 }
@@ -111,7 +114,7 @@ export default {
 .qkb-board-header__back-icon {
   width: 20px;
   height: 20px;
-  color: #d4ae69; // match your theme
+  color: #d4ae69;
 }
 
 .qkb-board-header__title {

@@ -1,0 +1,36 @@
+.qkb-home-page {
+  background: #f9f9f9;
+  height: 100%;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.qkb-home-title {
+  font-size: 1.5rem;
+  color: #d4ae69;
+  margin-bottom: 1rem;
+}
+
+.qkb-home-desc {
+  font-size: 1rem;
+  color: #555;
+  margin-bottom: 2rem;
+}
+
+.qkb-home-start {
+  background-color: #d4ae69;
+  color: #fff;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 6px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: 0.2s;
+}
+.qkb-home-start:hover {
+  background-color: #b9934e;
+}

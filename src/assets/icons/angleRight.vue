@@ -1,0 +1,8 @@
+<template>
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" class="directional-icon"><path d="M7.5 6.175L8.675 5L13.675 10L8.675 15L7.5 13.825L11.3167 10L7.5 6.175Z"></path></svg>
+</template>
+<script>
+export default {
+  name: 'AngleRight'
+}
+</script>

@@ -174,7 +174,10 @@ export default {
       if (initialMessage) {
         this.$nextTick(() => {
           setTimeout(() => {
-            this.sendMessage(initialMessage)
+            this.sendMessage({
+              text: initialMessage,
+              type: 'text'
+            })
           }, 200)
         })
       }

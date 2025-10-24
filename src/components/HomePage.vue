@@ -1,7 +1,7 @@
 <template lang="pug">
 .home-page
   .header
-    FutureLogo(style="width: 50px; height: 50px; margin-bottom: 1rem;")
+    img.future-logo(:src="require('../assets/icons/bot.png')")
     h2 Hi there! 👋
     p How can we help you?
   .content-container
@@ -31,7 +31,6 @@ import AngleRight from '../assets/icons/angleRight.vue'
 import SendIcon from '../assets/icons/send.svg'
 import ChatIcon from '../assets/icons/chatIcon.vue'
 import HomeIcon from '../assets/icons/homeIcon.vue'
-import FutureLogo from '../assets/icons/bot.png'
 
 export default {
   name: 'HomePage',
@@ -39,8 +38,7 @@ export default {
     AngleRight,
     SendIcon,
     ChatIcon,
-    HomeIcon,
-    FutureLogo
+    HomeIcon
   },
   data () {
     return {
@@ -94,6 +92,14 @@ export default {
       font-size: 0.95rem;
       opacity: 0.9;
       margin-bottom: 2rem;
+    }
+
+    .future-logo {
+      width: 40px;
+      height: 40px;
+      position: absolute;
+      top: 1rem;
+      left: 1rem;
     }
   }
 

@@ -12,3 +12,15 @@
 @import './components/header';
 @import './components/content';
 @import './components/action';
+
+@font-face {
+  font-family: 'BaiJamjuree';
+  src: url('~@/assets/fonts/BaiJamjuree-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+body {
+  font-family: 'BaiJamjuree', sans-serif;
+}

@@ -88,7 +88,7 @@ export default {
 
 <style lang="scss">
 #app {
-  font-family: "Banjulee", "Avenir", Helvetica, Arial, sans-serif;
+  font-family: 'BaiJamjuree', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;

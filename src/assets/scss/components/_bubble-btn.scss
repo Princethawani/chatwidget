@@ -3,6 +3,7 @@
 }
 
 .qkb-bubble-btn {
+  background: url('../img/header-bg.jpeg') center center/cover no-repeat;
   display: block;
   padding: 0;
   outline: 0;
@@ -22,7 +23,7 @@
 
 .qkb-bubble-btn-icon {
   display: block;
-  position: absolute;
+  position: relative;
   top: 50%;
   left: 50%;
   width: 27px;

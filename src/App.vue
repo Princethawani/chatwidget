@@ -15,7 +15,7 @@
       .qkb-board-header-slot
         button.qkb-board-header__back(@click="handleBack")
           BackIcon.qkb-board-header__back-icon
-        span.qkb-board-header__title GraceAI Chatbot
+        span.qkb-board-header__title RyuAI Chatbot
 </template>
 
 <script>

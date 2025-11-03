@@ -2,23 +2,23 @@
 .home-page
   .header
     img.future-logo(:src="require('../assets/icons/bot.png')")
-    h2 Hi there! 👋
+    h2 Hi there, I‘m Ryu! 👋
     p How can we help you?
   .content-container
     .options-container
       .option(v-for="(item, index) in options" :key="index" @click="handleOption(item)")
         span.option-text {{ item.text }}
         AngleRight.option-icon
-  .chat-section(@click="$emit('goToChat')")
+  .chat-section(@click="$emit('goToRegistration')")
     .chat-info
-      strong Chat with GraceAI
-      p Have questions? GraceAI is here to assist you
+      strong Chat with RyuAI / Support
+      p Have questions? RyuAI is here to assist you
     SendIcon.chat-icon
   .footer-nav
     .nav-item(:class="{ active: activeTab === 'home' }", @click="setTab('home')")
       HomeIcon
       span Home
-    .nav-item(:class="{ active: activeTab === 'chat' }", @click="$emit('goToChat')")
+    .nav-item(:class="{ active: activeTab === 'chat' }", @click="$emit('goToRegistration')")
       ChatIcon
       span Chat
   .powered
@@ -44,16 +44,17 @@ export default {
     return {
       activeTab: 'home',
       options: [
-        { text: 'What is GraceAI?' },
-        { text: 'Discover GraceAI Premium' },
-        { text: 'How to use GraceAI features?' }
+        { text: 'Explore FMV Offers' },
+        { text: 'Order FMV Packages' },
+        { text: 'Explore GuideBook' },
+        { text: 'Chat with RyuAI / Support' }
       ]
     }
   },
   methods: {
     handleOption (item) {
       console.log('Option clicked:', item.text)
-      this.$emit('goToChat', item.text)
+      this.$emit('goToRegistration', item.text)
     },
     setTab (tab) {
       this.activeTab = tab
@@ -72,27 +73,42 @@ export default {
   justify-content: baseline;
 
   .header {
-    background: #d4ae69;
-    color: #fff;
-    text-align: bottom-left;
-    height: 50%;
-    padding: 1.5rem;
-    display: flex;
-    justify-content: flex-end;
-    align-items: flex-start;
-    flex-direction: column;
+  // TODO: Use a background image for the header
+  background: #d4ae69;
+  // background: url('../assets/img/header-bg.jpeg') center center/cover no-repeat;
+  color: #fff;
+  text-align: bottom-left;
+  height: 50%;
+  padding: 1.5rem;
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-start;
+  flex-direction: column;
+  border-top-left-radius: 1rem;
+  border-top-right-radius: 1rem;
+  position: obsolute;
+  overflow: hidden;
 
-    h2 {
-      margin: 0;
-      font-size: 1.4rem;
-      font-weight: 600;
-    }
-    p {
-      margin: 0.4rem 0 0;
-      font-size: 0.95rem;
-      opacity: 0.9;
-      margin-bottom: 2rem;
-    }
+  h2 {
+    margin: 0;
+    font-size: 1.4rem;
+    font-weight: 600;
+  }
+
+  p {
+    margin: 0.4rem 0 0;
+    font-size: 0.95rem;
+    opacity: 0.9;
+    margin-bottom: 2rem;
+  }
+
+  .future-logo {
+    width: 40px;
+    height: 40px;
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+  }
 
     .future-logo {
       width: 40px;

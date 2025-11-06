@@ -1,31 +1,69 @@
 {
-  "name": "vue-bot-ui",
-  "version": "0.2.11",
-  "description": "Chatbot UI using Vue.js 2",
+  "name": "@princethawani/ryuai",
+  "version": "1.0.1",
+  "description": "RyuAI – Chatbot UI library built with Vue.js 2",
   "author": {
-    "name": "SonNH",
-    "email": "sonnh@ownego.com"
+    "name": "Prince Thawani",
+    "email": "princethawani4@gmail.com"
   },
+  "license": "MIT",
   "main": "dist/vue-bot-ui.common.js",
+  "module": "dist/vue-bot-ui.umd.js",
+  "unpkg": "dist/vue-bot-ui.umd.min.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/vue-bot-ui.umd.js",
+      "require": "./dist/vue-bot-ui.common.js"
+    }
+  },
   "files": [
-    "dist/*",
-    "src/*",
-    "package.json"
+    "dist/vue-bot-ui.common.js",
+    "dist/vue-bot-ui.umd.js",
+    "dist/vue-bot-ui.umd.min.js",
+    "dist/fonts",
+    "dist/img",
+    "README.md",
+    "LICENSE"
   ],
   "scripts": {
     "serve": "NODE_OPTIONS=--openssl-legacy-provider vue-cli-service serve",
     "build": "NODE_OPTIONS=--openssl-legacy-provider vue-cli-service build",
-    "build-bundle": "vue-cli-service build --target lib --name vue-bot-ui ./src/vue-bot-ui.js",
-    "release": "standard-version && git push --follow-tags && npm publish",
+    "build:lib": "NODE_OPTIONS=--openssl-legacy-provider vue-cli-service build --target lib --name vue-bot-ui ./src/vue-bot-ui.js",
+    "clean:dist": "rm -rf dist && mkdir -p dist/fonts dist/img",
+    "prep:lib": "npm run clean:dist && npm run build:lib && rm -f dist/*.1.js dist/demo.html && npm pack",
+    "prepare": "npm run build:lib",
+    "release": "standard-version && git push --follow-tags && npm publish --access public",
     "release:next": "standard-version --prerelease next && git push --follow-tags origin dev && npm publish --tag next",
     "lint": "vue-cli-service lint --fix",
     "test:unit": "vue-cli-service test:unit"
   },
   "keywords": [
     "chatbot",
-    "bot ui",
-    "vue-bot-ui"
+    "vue",
+    "bot-ui",
+    "ryuai",
+    "vue-bot-ui",
+    "chat-interface",
+    "vue2",
+    "ui-library"
   ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/princethawani/ryuai.git"
+  },
+  "bugs": {
+    "url": "https://github.com/princethawani/ryuai/issues"
+  },
+  "homepage": "https://github.com/princethawani/ryuai#readme",
+  "dependencies": {
+    "axios": "^1.12.2",
+    "emoji-picker-element": "^1.27.0",
+    "emoji-picker-vue": "^1.0.1"
+  },
+  "peerDependencies": {
+    "vue": "^2.6.10"
+  },
   "devDependencies": {
     "@commitlint/cli": "^7.6.1",
     "@commitlint/config-conventional": "^7.6.0",
@@ -50,19 +88,5 @@
     "vue-loader": "^15.8.3",
     "vue-svg-loader": "^0.15.0",
     "vue-template-compiler": "^2.6.10"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/JuzSer/vue-bot-ui.git"
-  },
-  "bugs": {
-    "url": "https://github.com/JuzSer/vue-bot-ui/issues"
-  },
-  "homepage": "https://github.com/JuzSer/vue-bot-ui#readme",
-  "license": "MIT",
-  "dependencies": {
-    "axios": "^1.12.2",
-    "emoji-picker-element": "^1.27.0",
-    "emoji-picker-vue": "^1.0.1"
   }
 }

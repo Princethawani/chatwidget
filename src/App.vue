@@ -10,7 +10,7 @@
     @init="botStart",
     @msg-send="msgSend",
   )
-    // 👇 Inject custom header slot (for back button + title)
+    //  Inject custom header slot (for back button + title)
     template(v-slot:header)
       .qkb-board-header-slot
         button.qkb-board-header__back(@click="handleBack")

@@ -18,13 +18,19 @@
       .form-group
         label(for="company") Company Name (Optional)
         input#company(type="text" v-model="form.company" placeholder="Enter your company name")
-        button.submit-btn(type="submit") Start Chat
+
+      button.submit-btn(type="submit" :disabled="loading")
+        span(v-if="loading") Registering...
+        span(v-else) Start Chat
+
   .powered
     span Powered by
     strong &nbsp; GraceAI
 </template>
 
 <script>
+import axios from 'axios'
+
 export default {
   name: 'RegistrationForm',
 
@@ -34,18 +40,16 @@ export default {
         name: '',
         email: '',
         company: ''
-      }
+      },
+      loading: false
     }
   },
 
   mounted () {
-    // Check if user data exists in localStorage
     const savedUser = localStorage.getItem('userInfo')
     if (savedUser) {
       const parsed = JSON.parse(savedUser)
       this.form = parsed
-
-      // Automatically continue to chat without showing the form again
       this.$emit('registrationComplete', {
         ...parsed,
         initialMessage: `Hi, I'm ${parsed.name}!`
@@ -54,25 +58,43 @@ export default {
   },
 
   methods: {
-    handleSubmit () {
+    async handleSubmit () {
       if (!this.form.name || !this.form.email) {
         alert('Please enter your name and email to continue.')
         return
       }
 
-      // Save form data to localStorage (TODO: Save to a database later)
-      localStorage.setItem('userInfo', JSON.stringify(this.form))
+      this.loading = true
 
-      console.log('Form submitted:', this.form)
+      try {
+        // Construct the payload exactly as required
+        const payload = {
+          name: this.form.name,
+          email: this.form.email,
+          'company name': this.form.company
+        }
 
-      // Prepare initial greeting message for the bot
-      const userData = {
-        ...this.form,
-        initialMessage: `Hi, I'm ${this.form.name}!`
+        // Send registration request to backend
+        const response = await axios.post('http://localhost:9000/api/register', payload)
+
+        if (response.data.success && response.data.user) {
+          const userData = {
+            ...response.data.user,
+            initialMessage: `Hi, I'm ${response.data.user.name}!`
+          }
+
+          localStorage.setItem('userInfo', JSON.stringify(userData))
+
+          this.$emit('registrationComplete', userData)
+        } else {
+          alert(response.data.message || 'Registration failed. Please try again.')
+        }
+      } catch (error) {
+        console.error('Registration error:', error)
+        alert('Something went wrong while connecting to the server.')
+      } finally {
+        this.loading = false
       }
-
-      // Emit event to parent (BotUI) to start chat
-      this.$emit('registrationComplete', userData)
     }
   }
 }

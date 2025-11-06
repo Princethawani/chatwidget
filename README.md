@@ -11,6 +11,13 @@ project-root/
 ├── src/                       # Main source code directory
 │   ├── assets/                # Static assets (images, icons, styles)
 │   ├── components/            # Reusable Vue components (UI, widgets, layouts)
+|   │   ├── Board/             # Includes -> Action.vue, Content.vue, Header.vue                   
+|   │   ├── MessageBubble/     # Inlcudes -> ButtonOptions.vue, Main.vue, Single.vue, Typing        
+|   │   ├── Outer/             # Includes -> AppStyle.vue, BotUi.vue, Homesection.vue
+|   │   ├── AppStyle.vue                 
+|   │   ├── HomePage.vue              
+|   │   └── RegistrationForm.vue
+|   |
 │   ├── config/                # Configuration files (API endpoints, environment variables)
 │   ├── helpers/               # Utility and helper functions
 │   ├── App.vue                # Root Vue component

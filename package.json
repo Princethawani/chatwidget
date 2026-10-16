@@ -1,10 +1,11 @@
 {
   "name": "@princethawani/ryuai",
   "version": "1.0.1",
-  "description": "RyuAI – Chatbot UI library built with Vue.js 2",
+  "description": "RyuAI \u2013 Chatbot UI library built with Vue.js 2",
   "author": {
     "name": "Prince Thawani",
-    "email": "princethawani4@gmail.com"
+    "email": "princethawani4@gmail.com",
+    "url": "https://princethawani.com/"
   },
   "license": "MIT",
   "main": "dist/vue-bot-ui.common.js",
@@ -50,12 +51,12 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/princethawani/ryuai.git"
+    "url": "git+https://github.com/princethawani/chatwidget.git"
   },
   "bugs": {
     "url": "https://github.com/princethawani/ryuai/issues"
   },
-  "homepage": "https://github.com/princethawani/ryuai#readme",
+  "homepage": "https://github.com/princethawani/chatwidget#readme",
   "dependencies": {
     "axios": "^1.12.2",
     "emoji-picker-element": "^1.27.0",
